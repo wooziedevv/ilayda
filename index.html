@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İlayda 💖</title>
+  <style>
+    body {
+      background: pink;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+    h1, h2, p {
+      color: #d63384;
+    }
+    input, button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    input {
+      border: 2px solid #d63384;
+    }
+    button {
+      background: #d63384;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    #question, #result {
+      display: none;
+    }
+    #noBtn {
+      background: #555;
+    }
+    /* Kalp animasyonu */
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 20px;
+      animation: floatUp 5s linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-800px) scale(0.5); opacity: 0; }
+    }
+    a.call-link {
+      display: inline-block;
+      background: #d63384;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    a.call-link:hover {
+      background: #b02068;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔒 Şifreyi Gir</h1>
+  <input type="password" id="password" placeholder="Şifre">
+  <button onclick="checkPassword()">Gönder</button>
+
+  <div id="question">
+    <h2>Umarım benden hoşlanıyorsundur 💕</h2>
+    <p>Çünkü ben senden hoşlanıyorum 🥰</p>
+    <button id="yesBtn" onclick="sayYes()">Evet</button>
+    <button id="noBtn" onclick="sayNo()">Hayır</button>
+  </div>
+
+  <div id="result">
+    <h2>Biliyordum 😍</h2>
+    <p>Şimdi güzelliğini alıp beni arıyorsun 💖</p>
+    <a href="tel:0501037106" class="call-link">📞 Beni Ara</a>
+  </div>
+
+  <script>
+    function checkPassword() {
+      let pass = document.getElementById("password").value;
+      if(pass === "İlayda" || pass === "ilayda") {
+        document.querySelector("h1").style.display = "none";
+        document.querySelector("input").style.display = "none";
+        document.querySelector("button").style.display = "none";
+        document.getElementById("question").style.display = "block";
+      } else {
+        alert("Yanlış şifre, tekrar dene 💔");
+      }
+    }
+
+    let noClickCount = 0;
+    function sayNo() {
+      let noBtn = document.getElementById("noBtn");
+      noClickCount++;
+      noBtn.style.transform = `scale(${1 - noClickCount*0.2})`;
+      if(noClickCount >= 3) {
+        noBtn.style.display = "none";
+      }
+    }
+
+    function sayYes() {
+      document.getElementById("question").style.display = "none";
+      document.getElementById("result").style.display = "block";
+    }
+
+    // Kalpler üret
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = window.innerHeight + "px";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
